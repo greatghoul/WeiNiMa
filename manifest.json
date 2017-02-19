@@ -1,0 +1,15 @@
+{
+  "name": "微匿码",
+  "version": "1.0",
+  "manifest_version": 2,
+  "description": "禁用微博 Apple Store 推广链接",
+  "icons": {
+      "128": "icon-128.png"
+  },
+  "browser_action": {},
+  "background": { "scripts": [ "event.js" ] },
+  "permissions": [
+		"webNavigation"
+  ]
+}
+
