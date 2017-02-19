@@ -1,8 +1,22 @@
-function navigateHandler(details) {
-  const url = details.url.replace(/\?at=1001lbb6&?/ig, '?').replace(/&at=1001lbb6/ig, ''); 
-  chrome.tabs.update(details.tabId, { url: url });
+const filters = {
+  urls: [
+    '*://itunes.apple.com/app/id*'
+  ],
+  types: [
+    'main_frame',
+    'sub_frame'
+  ]
+};
+
+function handler(details) {
+  let url = details.url;
+
+  if (url.indexOf('at=1001lbb6') != -1) {
+    url = url.replace(/\?at=1001lbb6&?/ig, '?')
+             .replace(/&at=1001lbb6/ig, '');
+    // chrome.tabs.update(details.tabId, { url: url });
+    return { redirectUrl: url };
+  }
 }
 
-chrome.webNavigation.onBeforeNavigate.addListener(navigateHandler, {
-  url: [{ urlContains: 'itunes.apple.com/app/id', queryContains: 'at=1001lbb6' }]
-});
+chrome.webRequest.onBeforeRequest.addListener(handler, filters, ['blocking']);

@@ -10,7 +10,9 @@
   "background": { "scripts": [ "event.js" ] },
   "permissions": [
     "tabs",
-		"webNavigation"
+    "webRequest",
+    "webRequestBlocking",
+    "*://itunes.apple.com/app/id*"
   ]
 }
 
